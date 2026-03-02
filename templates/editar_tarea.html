@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h2>Editar tarea</h2>
+
+<form action="{{ url_for('editar_tarea', tarea_id=tarea.id) }}" method="post">
+    {{ form.csrf_token() }}
+    {{ form.titulo.label }}
+    {{ form.titulo }}
+    {{ form.enviar(value='Guardar cambios') }}
+</form>
+
+<p><a href="{{ url_for('sobrenosotros') }}">Volver</a></p>
+{% endblock %}

@@ -23,6 +23,18 @@ def sobrenosotros():
     tareas = Tarea.query.order_by(Tarea.id.desc()).all()
     return render_template('sobrenosotros.html', form=formulario, tareas=tareas)
 
+@app.route('/tareas/editar/<int:tarea_id>', methods=['GET', 'POST'])
+def editar_tarea(tarea_id):
+    tarea = Tarea.query.get_or_404(tarea_id)
+    formulario = formularios.FormAgregarTareas()
+
+    if formulario.validate_on_submit():
+        tarea.titulo = formulario.titulo.data
+        db.session.commit()
+        return redirect(url_for('sobrenosotros'))
+
+    formulario.titulo.data = tarea.titulo
+    return render_template('editar_tarea.html', form=formulario, tarea=tarea)
 
 @app.route('/tareas/eliminar/<int:tarea_id>', methods=['POST'])
 def eliminar_tarea(tarea_id):
