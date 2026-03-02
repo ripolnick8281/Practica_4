@@ -23,6 +23,10 @@ def sobrenosotros():
     tareas = Tarea.query.order_by(Tarea.id.desc()).all()
     return render_template('sobrenosotros.html', form=formulario, tareas=tareas)
 
+@app.route('/tareas')
+def mostrar_tareas():
+    tareas = Tarea.query.order_by(Tarea.id.desc()).all()
+    return render_template('tareas.html', tareas=tareas)
 
 @app.route('/tareas/eliminar/<int:tarea_id>', methods=['POST'])
 def eliminar_tarea(tarea_id):
