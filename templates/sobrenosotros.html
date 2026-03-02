@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block contenido %}
+<h2>Taller Apps - Sobre nosotros</h2>
+<h4>Bienvenido a este sitio de taller .....</h4>
+
+<form action="{{ url_for('sobrenosotros') }}" method="post">
+    {{ form.csrf_token() }}
+    {{ form.titulo.label }}
+    {{ form.titulo }}
+    {{ form.enviar }}
+</form>
+
+<hr>
+<h3>Lista de tareas</h3>
+
+{% if tareas %}
+<ul>
+    {% for tarea in tareas %}
+    <li>
+        {{ tarea.titulo }}
+        <form action="{{ url_for('eliminar_tarea', tarea_id=tarea.id) }}" method="post" style="display:inline;">
+            <button type="submit">Eliminar</button>
+        </form>
+    </li>
+    {% endfor %}
+</ul>
+{% else %}
+<p>No hay tareas registradas.</p>
+{% endif %}
+{% endblock %}
