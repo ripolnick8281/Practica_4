@@ -3,7 +3,7 @@
 {% block contenido %}
 <h2>Taller Apps - Sobre nosotros</h2>
 <h4>Bienvenido a este sitio de taller .....</h4>
-
+ <a href="{{ url_for('editar_tarea', tarea_id=tarea.id) }}">Editar</a>
 <form action="{{ url_for('sobrenosotros') }}" method="post">
     {{ form.csrf_token() }}
     {{ form.titulo.label }}
